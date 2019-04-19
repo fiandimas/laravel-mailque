@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\SendEmailJob;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +12,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    SendEmailJob::dispatch()->delay(now()->addSeconds(5));
+
+    return 'Email is queued!';
 });
